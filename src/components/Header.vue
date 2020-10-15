@@ -19,7 +19,7 @@ interface HeaderArray {
   isClicked: boolean;
 }
 
-import { Vue, Component, Prop, Watch, Emit } from "vue-property-decorator";
+import { Vue, Component, Emit } from "vue-property-decorator";
 @Component
 export default class Header extends Vue {
   private type: Array<HeaderArray> = [
@@ -47,7 +47,9 @@ export default class Header extends Vue {
     }
     this.headCache.push(index);
     if (index == 4) {
-      this.$router.push("/favorite");
+      this.$router.replace("/favorite");
+    } else {
+      this.$router.replace("/");
     }
     item.isClicked = !item.isClicked;
     this.change(index);

@@ -1,0 +1,113 @@
+<template>
+  <div class="content">
+    <Header></Header>
+    <div class="box">
+      <div class="progress_body">
+        <div class="progress">
+          <div class="spinner"><i></i></div>
+        </div>
+        <div class="text">加载中</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import Header from "@/components/Header.vue";
+@Component({
+  components: {
+    Header
+  }
+})
+export default class Loading extends Vue {}
+</script>
+
+<style scoped>
+.content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  color: white;
+  font-size: 13px;
+}
+.progress {
+  padding-bottom: 10px;
+}
+.progress_body{
+  width: 36px;
+  height: 64px;
+}
+.progress_body:after{
+  content: "...";
+  position: absolute;
+  height: 18px;
+  top: 76px;
+  left: 82px;
+}
+.box {
+  position: absolute;
+  left: 50%;
+  margin-left: -60px;
+  top: 50%;
+  margin-top: -60px;
+  width: 120px;
+  height: 120px;
+  background-color: #292f3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  flex-direction: column;
+}
+.text {
+  width: 52px;
+  height: 18px;
+}
+.spinner {
+  font-size: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px #535763;
+}
+.spinner i {
+  position: absolute;
+  clip: rect(0, 36px, 36px, 18px);
+  width: 36px;
+  height: 36px;
+  animation: spinner-circle-clipper 2s ease-in-out infinite;
+}
+
+@keyframes spinner-circle-clipper {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(180deg);
+  }
+}
+.spinner i:after {
+  position: absolute;
+  clip: rect(0, 36px, 36px, 18px);
+  width: 36px;
+  height: 36px;
+  content: "";
+  animation: spinner-circle 2s ease-in-out infinite;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px #ff5353;
+}
+
+@keyframes spinner-circle {
+  0% {
+    transform: rotate(-180deg);
+  }
+
+  100% {
+    transform: rotate(180deg);
+  }
+}
+</style>
