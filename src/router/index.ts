@@ -3,7 +3,6 @@ import VueRouter, { RouteConfig } from "vue-router";
 import Home from "../views/Home.vue";
 import Info from "../views/Info.vue"
 import Mylist from "../views/mylist.vue";
-import Favorite from "@/views/favorite.vue";
 import Nofavorite from "@/views/nofavorite.vue";
 import Loading from "@/views/loading.vue";
 import NetError from "@/views/netError.vue";
@@ -18,7 +17,7 @@ const routes: Array<RouteConfig> = [
     component: Home
   },
   {
-    path: "/Info",
+    path: "/Info/:id&&:type",
     name: "Info",
     component: Info
   },
@@ -26,11 +25,6 @@ const routes: Array<RouteConfig> = [
     path: "/list/:id",
     name: "List",
     component: Mylist
-  },
-  {
-    path: "/favorite",
-    name: "Favorite",
-    component: Favorite
   },
   {
     path: "/nofavorite",
@@ -48,7 +42,7 @@ const routes: Array<RouteConfig> = [
     component: NetError
   },
   {
-    path: "/SpecialInfo",
+      path: "/SpecialInfo",
     name: "SpecialInfo",
     component: SpecialInfo
   }

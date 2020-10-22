@@ -1,6 +1,6 @@
 <template>
   <div class="nav">
-    <img id="nav_img" src="../assets/back.png" />
+    <img @click="back()" id="nav_img" src="../assets/back.png" />
     <div class="text">
       <span
         v-for="(item, index) in type"
@@ -17,9 +17,10 @@
 interface HeaderArray {
   name: string;
   isClicked: boolean;
+  index?: string;
 }
 
-import { Vue, Component, Emit } from "vue-property-decorator";
+import { Vue, Component, Emit, Prop } from "vue-property-decorator";
 @Component
 export default class Header extends Vue {
   private type: Array<HeaderArray> = [
@@ -36,8 +37,20 @@ export default class Header extends Vue {
     "devote",
     "like"
   ];
+
+  @Prop({
+    type: Number,
+    required: false,
+    default: Number
+  })
+  private defaultTypeIndex!: number;
+
   @Emit("changed") change(msg: any) {
     return this.type_en[msg];
+  }
+  created():void{
+    this.type[this.defaultTypeIndex].isClicked = true
+    this.headCache.push(this.defaultTypeIndex)
   }
   private headCache: Array<number> = [];
   private changeMusic(index: number, item: Record<string, boolean>) {
@@ -46,13 +59,11 @@ export default class Header extends Vue {
       this.type[Number(s)].isClicked = false;
     }
     this.headCache.push(index);
-    if (index == 4) {
-      this.$router.replace("/favorite");
-    } else {
-      this.$router.replace("/");
-    }
     item.isClicked = !item.isClicked;
     this.change(index);
+  }
+  private back() {
+    this.$router.go(-1);
   }
 }
 </script>
@@ -70,7 +81,6 @@ export default class Header extends Vue {
   width: 29px;
   height: 27px;
   margin-left: 10px;
-  margin-right: 30px;
 }
 .text {
   height: 50px;
@@ -85,13 +95,15 @@ export default class Header extends Vue {
   display: none;
 }
 span {
-  margin-right: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
   width: 34px;
   white-space: nowrap;
   height: 24px;
   color: #ffffff;
   font-size: 17px;
   margin-left: 0;
+  margin-right: 0;
   color: rgba(255, 255, 255, 0.4);
 }
 .clicked {

@@ -9,8 +9,9 @@
       <article class="article_content">
         <header class="article_title1">{{ title_name }}</header>
         <div>
-          <p>
-            专辑|雨天的心情。舒缓心情。解压，平静，万物得到雨露的滋润，生长，是多么美好的画面《雨天的心情是
+          <p id="short-sentence">
+            专辑 |
+            雨天的心情。舒缓心情。解压，平静，万物得到雨露的滋润，生长，是多么美好的画面《雨天的心情是
           </p>
           <img src="../assets/next.png" style="width:20px;height:20px;" />
         </div>
@@ -28,13 +29,13 @@
             src="../assets/white_heart.png"
             style="width:20px;height:20px;"
             v-if="!isLike"
-            @click="isLike = !isLike"
+            @click="addLike"
           />
           <img
             src="../assets/red_heart.png"
             style="width:20px;height:20px;"
             v-if="isLike"
-            @click="isLike = !isLike"
+            @click="addLike"
           />
         </div>
         <div
@@ -92,6 +93,9 @@ export default class Detail extends Vue {
       time: "10:00"
     }
   ];
+  private addLike():void{
+    this.isLike = !this.isLike
+  }
   private back() {
     this.$router.back();
   }
@@ -101,6 +105,9 @@ export default class Detail extends Vue {
 <style scoped>
 .all {
   color: white;
+}
+#short-sentence {
+  line-height: 18px;
 }
 .header {
   width: 100%;

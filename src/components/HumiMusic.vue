@@ -8,7 +8,10 @@
       </div>
       <img src="../assets/next.png" v-if="true" alt="next" />
     </div>
-    <SlideMusic :isSpecial="isSpecial"></SlideMusic>
+    <SlideMusic
+      :isSpecial="isSpecial"
+      @navigate-to-list="navigateToList"
+    ></SlideMusic>
   </div>
 </template>
 
@@ -59,13 +62,21 @@ export default class HumiMusic extends Vue {
         break;
       case "专辑 | 听着就犯困":
         id = 2;
-        break;
+        break
       default:
         id = 0;
         break;
     }
     this.$router.push({
       path: `/list/${id}`
+    });
+  }
+  public navigateToList(index: number) {
+    const _ID = String(index);
+    const TYPE = this.typeName;
+    this.$router.push({
+      name: "Info",
+      params: { id: _ID, type: TYPE}
     });
   }
 }

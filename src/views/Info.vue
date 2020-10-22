@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Detail></Detail>
+    <Detail ></Detail>
   </div>
 </template>
 
@@ -12,6 +12,7 @@ import Detail from "../components/detail.vue";
     Detail
   }
 })
-export default class Info extends Vue {}
+export default class Info extends Vue {
+}
 </script>
 <style scoped></style>

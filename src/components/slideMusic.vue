@@ -8,6 +8,7 @@
         }"
         v-for="item in musicList"
         :key="item.id"
+        @click="navigateToList(item.id)"
       >
         <div :class="{ special: isSpecial, 'each-img': !isSpecial }">
           <img :src="item.img" alt="musicImg" />
@@ -19,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Emit, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class SlideMusic extends Vue {
@@ -200,6 +201,11 @@ export default class SlideMusic extends Vue {
     default: Boolean
   })
   private isSpecial!: boolean;
+  @Emit()
+  public navigateToList(index: number): void {
+    console.log(index)
+    this.$emit("navigate", index);
+  }
 }
 </script>
 
@@ -256,5 +262,8 @@ export default class SlideMusic extends Vue {
 }
 .text {
   color: #868992;
+  box-sizing: border-box;
+  padding-top: 10px;
+  padding-left: 10px;
 }
 </style>

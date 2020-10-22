@@ -9,12 +9,19 @@
           alt="specialE"
           v-if="title === '专辑 | 听着就犯困'"
         />
-        <div class="middle">
+        <div class="middle" v-if="isMusic">
           <p>{{ item.name }}</p>
           <div>
-            <img src="../assets/listen.png" alt="listen" />
+            <img src="../assets/listen.png" alt="listen" v-if="isMusic" />
             {{ item.sum }}万
           </div>
+        </div>
+        <div class="middle" v-if="isSpecial">
+          <div class="title">{{ item.name }}</div>
+          <div class="from">{{item.from}}</div>
+        </div>
+        <div class="middle" v-if="isCombin" id="combin">
+          <div class="title">{{ item.name }}</div>
         </div>
         <div class="right">
           <img src="../assets/next.png" alt="next" />
@@ -42,6 +49,27 @@ export default class List extends Vue {
     default: undefined
   })
   public title: string | undefined;
+
+  @Prop({
+    type: Boolean,
+    required: false,
+    default: undefined
+  })
+  public isMusic: boolean | undefined;
+
+  @Prop({
+    type: Boolean,
+    required: false,
+    default: undefined
+  })
+  public isSpecial: boolean | undefined;
+
+  @Prop({
+    type: Boolean,
+    required: false,
+    default: undefined
+  })
+  public isCombin: boolean | undefined;
 }
 </script>
 
@@ -89,6 +117,13 @@ export default class List extends Vue {
   flex-direction: column;
   justify-content: space-between;
 }
+.middle>.title{
+  color: #ffffff;
+  font-size: 14px;
+}
+.middle> .from{
+  font-size: 12px;
+}
 .middle > p {
   width: 28px;
   height: 20px;
@@ -103,7 +138,9 @@ export default class List extends Vue {
   height: 10px;
   margin-right: 3px;
 }
-
+#combin{
+  justify-content: center;
+}
 .right > img {
   width: 16px;
   height: 24px;
