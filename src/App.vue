@@ -6,16 +6,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import Header from "./components/Header.vue";
-import HumiMusic from "./components/HumiMusic.vue";
-import Detail from "./components/detail.vue";
-@Component({
-  components: {
-    Header,
-    HumiMusic,
-    Detail
-  }
-})
+@Component({})
 export default class App extends Vue {}
 </script>
 
@@ -25,6 +16,23 @@ export default class App extends Vue {}
   padding: 0;
   border: 0;
 }
+
+@media (max-width: 320px) {
+  #app {
+    font-size: 14px !important;
+  }
+}
+@media (min-width: 320px) and (max-width: 375px) {
+  #app {
+    font-size: 16px !important;
+  }
+}
+@media (min-width: 375px) {
+  #app {
+    font-size: 18px !important;
+  }
+}
+
 #app {
   height: 100%;
   width: 100%;

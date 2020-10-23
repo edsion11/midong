@@ -1,5 +1,5 @@
 <template>
-  <div class="music_com">
+  <div>
     <div class="lateral-sliding">
       <div
         :class="{

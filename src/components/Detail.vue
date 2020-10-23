@@ -1,56 +1,54 @@
 <template>
   <div class="all">
     <header class="header">
-      <img src="../assets/back.png" @click="back()" />
+      <img :src="BACKPATH" @click="back()" />
       <header class="title">{{ title }}</header>
       <header class="none">none</header>
     </header>
     <div class="article">
-      <article class="article_content">
-        <header class="article_title1">{{ title_name }}</header>
+      <article class="article-content">
+        <header class="article-title1">{{ titleName }}</header>
         <div>
-          <p id="short-sentence">
+          <p class="short-sentence">
             专辑 |
             雨天的心情。舒缓心情。解压，平静，万物得到雨露的滋润，生长，是多么美好的画面《雨天的心情是
           </p>
-          <img src="../assets/next.png" style="width:20px;height:20px;" />
+          <img :src="NEXT" class="short-sentence-img" />
         </div>
         <p>以下内容来自于喜马拉雅App</p>
       </article>
-      <div class="music_all">
-        <div class="music_title_all">
-          <div class="play_all">
-            <img src="../assets/play.png" style="width:20px;height:20px;" />
-            <div style="margin-left:10px">
+      <div class="music-all">
+        <div class="music-title-all">
+          <div class="play-all">
+            <img :src="PLAY" class="short-sentence-img" />
+            <div class="list-header">
               播放全部 (共 {{ musicList.length }} 首)
             </div>
           </div>
           <img
-            src="../assets/white_heart.png"
-            style="width:20px;height:20px;"
+            :src="WHITE_HEART"
+            class="short-sentence-img"
             v-if="!isLike"
             @click="addLike"
           />
           <img
-            src="../assets/red_heart.png"
-            style="width:20px;height:20px;"
+            :src="RED_HEART"
+            class="short-sentence-img"
             v-if="isLike"
             @click="addLike"
           />
         </div>
-        <div
-          style="height:1px;background-color:gray;width:317px;margin:0 auto;"
-        ></div>
-        <div v-for="(item, index) in musicList" :key="index" class="music_ul">
+        <div class="line"></div>
+        <div v-for="(item, index) in musicList" :key="index" class="music-ul">
           <div class="index">
             <span>{{ index + 1 }}</span>
           </div>
           <div class="music">
-            <div class="music_info">
+            <div>
               <p>{{ item.name }}</p>
               <p class="time">{{ item.time }}</p>
             </div>
-            <img src="../assets/next.png" style="width:20px;height:20px;" />
+            <img :src="NEXT" class="short-sentence-img" />
           </div>
         </div>
       </div>
@@ -60,12 +58,20 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
+import { AppModule } from "@/store/modules/app";
+import { IMGPATH } from "@/constants/imgPath";
+
 @Component({
   components: {}
 })
 export default class Detail extends Vue {
+  BACKPATH: string = IMGPATH.BACK;
+  NEXT: string = IMGPATH.NEXT;
+  WHITE_HEART: string = IMGPATH.WHITE_HEART;
+  RED_HEART: string = IMGPATH.RED_HEART;
+  PLAY: string = IMGPATH.PLAY;
   private title = "助眠";
-  private title_name = "专辑|雨天的心情";
+  private titleName = "专辑|雨天的心情";
   private isLike = false;
   private musicList = [
     {
@@ -93,8 +99,9 @@ export default class Detail extends Vue {
       time: "10:00"
     }
   ];
-  private addLike():void{
-    this.isLike = !this.isLike
+  private addLike(): void {
+    this.isLike = !this.isLike;
+    AppModule.addLike();
   }
   private back() {
     this.$router.back();
@@ -106,8 +113,21 @@ export default class Detail extends Vue {
 .all {
   color: white;
 }
-#short-sentence {
-  line-height: 18px;
+.list-header {
+  margin-left: 10px;
+}
+.short-sentence {
+  line-height: 18px !important;
+}
+.short-sentence-img {
+  width: 20px;
+  height: 20px;
+}
+.line {
+  height: 1px;
+  background-color: gray;
+  width: 317px;
+  margin: 0 auto;
 }
 .header {
   width: 100%;
@@ -132,19 +152,19 @@ export default class Detail extends Vue {
   padding: 15px;
   width: 100%;
 }
-.article_content {
+.article-content {
   box-sizing: border-box;
   padding: 15px;
   background-color: rgba(255, 253, 253, 0.05);
   border-radius: 10px;
   height: 128px;
 }
-.article_content > div {
+.article-content > div {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.article_content > div > p {
+.article-content > div > p {
   font-size: 13px;
   width: 285px;
   height: 36px;
@@ -158,7 +178,7 @@ export default class Detail extends Vue {
   margin-top: 10px;
   opacity: 0.6;
 }
-.article_content > p {
+.article-content > p {
   font-size: 13px;
   width: 285px;
   height: 36px;
@@ -172,7 +192,7 @@ export default class Detail extends Vue {
   margin-top: 10px;
   opacity: 0.6;
 }
-.article_title1 {
+.article-title1 {
   font-size: 17px;
 }
 .index {
@@ -187,12 +207,12 @@ export default class Detail extends Vue {
   width: 6px;
   height: 20px;
 }
-.music_all {
+.music-all {
   box-sizing: border-box;
   background-color: rgba(255, 253, 253, 0.05);
   border-radius: 10px;
 }
-.music_title_all {
+.music-title-all {
   margin-top: 17px;
   height: 52px;
   box-sizing: border-box;
@@ -202,12 +222,12 @@ export default class Detail extends Vue {
   align-items: center;
   justify-content: space-between;
 }
-.play_all {
+.play-all {
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
-.music_ul {
+.music-ul {
   display: flex;
   align-items: center;
   justify-content: space-between;

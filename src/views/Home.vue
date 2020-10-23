@@ -18,7 +18,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import HumiMusic from "../components/HumiMusic.vue";
 import Header from "../components/Header.vue";
-import Favorite from "@/components/favorite.vue";
+import Favorite from "@/components/Favorite.vue";
 
 @Component({
   components: {

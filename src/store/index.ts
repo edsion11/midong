@@ -1,12 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import favorite from "@/store/modules/favorite";
+import { MusicState } from './modules/app'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-    modules: {
-        favorite
-    }
-})
+export interface RootState {
+    music: MusicState
+}
 
+export default new Vuex.Store<RootState>({})

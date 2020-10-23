@@ -1,0 +1,21 @@
+export const IMGPATH = {
+    BACK: require("../assets/back.png"),
+    CLOCK: require("../assets/clock.png"),
+    EARTH: require("../assets/earth.png"),
+    FAVORITE_SPECIAL: require("../assets/favoriteS.png"),
+    LISTEN: require("../assets/listen.png"),
+    LISTENING: require("../assets/listening.png"),
+    LOGO: require("../assets/logo.png"),
+    MUSIC: require("../assets/music.png"),
+    MUSIC_LIST: require("../assets/musiclist.png"),
+    MYLIKE: require("../assets/myLike.png"),
+    NEXT: require("../assets/next.png"),
+    PLAY: require("../assets/play.png"),
+    RED_PLAY: require("../assets/red_play.png"),
+    RED_HEART: require("../assets/red_heart.png"),
+    SHARE: require("../assets/share.png"),
+    SPECIAL_BG: require("../assets/specialE.png"),
+    SUSPEND: require("../assets/suspend.png"),
+    TIME: require("../assets/time.png"),
+    WHITE_HEART:require("../assets/white_heart.png")
+}

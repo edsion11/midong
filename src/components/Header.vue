@@ -1,10 +1,10 @@
 <template>
   <div class="nav">
-    <img @click="back()" id="nav_img" src="../assets/back.png" />
+    <img @click="back()" class="nav-img" :src="BACK" />
     <div class="text">
       <span
         v-for="(item, index) in type"
-        :class="{ clicked: item.isClicked }"
+        :class="{ clicked: index === typeIndex }"
         :key="index"
         @click="changeMusic(index, item)"
         >{{ item.name }}</span
@@ -21,6 +21,7 @@ interface HeaderArray {
 }
 
 import { Vue, Component, Emit, Prop } from "vue-property-decorator";
+import { IMGPATH } from "@/constants/imgPath";
 @Component
 export default class Header extends Vue {
   private type: Array<HeaderArray> = [
@@ -37,7 +38,7 @@ export default class Header extends Vue {
     "devote",
     "like"
   ];
-
+  BACK = IMGPATH.BACK;
   @Prop({
     type: Number,
     required: false,
@@ -48,18 +49,12 @@ export default class Header extends Vue {
   @Emit("changed") change(msg: any) {
     return this.type_en[msg];
   }
-  created():void{
-    this.type[this.defaultTypeIndex].isClicked = true
-    this.headCache.push(this.defaultTypeIndex)
+  created(): void {
+    this.type[this.defaultTypeIndex].isClicked = true;
   }
-  private headCache: Array<number> = [];
+  typeIndex = 0;
   private changeMusic(index: number, item: Record<string, boolean>) {
-    if (this.headCache.length) {
-      const s = this.headCache.shift();
-      this.type[Number(s)].isClicked = false;
-    }
-    this.headCache.push(index);
-    item.isClicked = !item.isClicked;
+    this.typeIndex = index;
     this.change(index);
   }
   private back() {
@@ -77,7 +72,7 @@ export default class Header extends Vue {
   justify-content: space-around;
 }
 
-#nav_img {
+.nav-img {
   width: 29px;
   height: 27px;
   margin-left: 10px;

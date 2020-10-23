@@ -4,27 +4,27 @@
       <div class="list" v-for="item in musicLists" :key="item.index">
         <img :src="item.imgUrl" alt="musicImg" />
         <img
-          id="specialE"
-          src="../assets/specialE.png"
+          class="specialE"
+          :src="SPECIAL_BG"
           alt="specialE"
           v-if="title === '专辑 | 听着就犯困'"
         />
         <div class="middle" v-if="isMusic">
           <p>{{ item.name }}</p>
           <div>
-            <img src="../assets/listen.png" alt="listen" v-if="isMusic" />
+            <img :src="LISTEN" alt="listen" v-if="isMusic" />
             {{ item.sum }}万
           </div>
         </div>
         <div class="middle" v-if="isSpecial">
           <div class="title">{{ item.name }}</div>
-          <div class="from">{{item.from}}</div>
+          <div class="from">{{ item.from }}</div>
         </div>
-        <div class="middle" v-if="isCombin" id="combin">
+        <div class="middle combin" v-if="isCombin" >
           <div class="title">{{ item.name }}</div>
         </div>
         <div class="right">
-          <img src="../assets/next.png" alt="next" />
+          <img :src="NEXT" alt="next" />
         </div>
       </div>
     </div>
@@ -33,9 +33,13 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { IMGPATH } from "@/constants/imgPath";
 
 @Component
 export default class List extends Vue {
+  NEXT = IMGPATH.NEXT;
+  SPECIAL_BG = IMGPATH.SPECIAL_BG;
+  LISTEN = IMGPATH.LISTEN;
   @Prop({
     type: Array,
     required: false,
@@ -101,7 +105,7 @@ export default class List extends Vue {
   height: 60px;
   border-radius: 5px;
 }
-#specialE {
+.list > .specialE {
   height: 60px;
   width: 8px;
 }
@@ -117,11 +121,11 @@ export default class List extends Vue {
   flex-direction: column;
   justify-content: space-between;
 }
-.middle>.title{
+.middle > .title {
   color: #ffffff;
   font-size: 14px;
 }
-.middle> .from{
+.middle > .from {
   font-size: 12px;
 }
 .middle > p {
@@ -138,8 +142,8 @@ export default class List extends Vue {
   height: 10px;
   margin-right: 3px;
 }
-#combin{
-  justify-content: center;
+.combin {
+  justify-content: center!important;
 }
 .right > img {
   width: 16px;

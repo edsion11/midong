@@ -1,18 +1,17 @@
 <template>
   <div>
-    <Detail ></Detail>
+    <Detail></Detail>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import Detail from "../components/detail.vue";
+import Detail from "../components/Detail.vue";
 @Component({
   components: {
     Detail
   }
 })
-export default class Info extends Vue {
-}
+export default class Info extends Vue {}
 </script>
 <style scoped></style>

@@ -1,12 +1,12 @@
 <template>
   <div class="music_com">
     <div class="header" @click="navigateToInfo()">
-      <div class="header_left">
-        <img src="../assets/music.png" v-if="!isSpecial" alt="music" />
-        <img src="../assets/musiclist.png" v-if="isSpecial" alt="musiclist" />
+      <div class="header-left">
+        <img :src="MUSIC" v-if="!isSpecial" alt="music" />
+        <img :src="MUSICLIST" v-if="isSpecial" alt="musiclist" />
         <div>{{ typeName }}</div>
       </div>
-      <img src="../assets/next.png" v-if="true" alt="next" />
+      <img :src="NEXT" v-if="true" alt="next" />
     </div>
     <SlideMusic
       :isSpecial="isSpecial"
@@ -16,9 +16,10 @@
 </template>
 
 <script lang="ts">
-import SlideMusic from "@/components/slideMusic.vue";
+import SlideMusic from "@/components/SlideMusic.vue";
 import { Component, Vue, Prop, Watch, Emit } from "vue-property-decorator";
-import List from "@/components/list.vue";
+import List from "@/components/List.vue";
+import { IMGPATH } from "@/constants/imgPath";
 
 @Component({
   components: {
@@ -27,6 +28,9 @@ import List from "@/components/list.vue";
   }
 })
 export default class HumiMusic extends Vue {
+  NEXT = IMGPATH.NEXT;
+  MUSIC = IMGPATH.MUSIC;
+  MUSICLIST = IMGPATH.MUSIC_LIST;
   private isNext!: boolean;
   @Prop({
     type: Boolean,
@@ -52,31 +56,17 @@ export default class HumiMusic extends Vue {
     console.log("Header组件更新了", oldVal);
   }
   public navigateToInfo() {
-    let id: number;
-    switch (this.typeName) {
-      case "大自然的呼吸节奏":
-        id = 0;
-        break;
-      case "夜晚催眠曲":
-        id = 1;
-        break;
-      case "专辑 | 听着就犯困":
-        id = 2;
-        break
-      default:
-        id = 0;
-        break;
-    }
+    const NAME = this.typeName
     this.$router.push({
-      path: `/list/${id}`
+      path: `/list/${NAME}`
     });
   }
   public navigateToList(index: number) {
-    const _ID = String(index);
+    const ID = String(index);
     const TYPE = this.typeName;
     this.$router.push({
       name: "Info",
-      params: { id: _ID, type: TYPE}
+      params: { id: ID, type: TYPE }
     });
   }
 }
@@ -100,13 +90,13 @@ export default class HumiMusic extends Vue {
   width: 16px;
   height: 24px;
 }
-.header_left > div {
+.header-left > div {
   position: relative;
   left: 19px;
   color: white;
   display: inline;
 }
-.header_left > img {
+.header-left > img {
   position: relative;
   top: 2px;
   width: 16px;

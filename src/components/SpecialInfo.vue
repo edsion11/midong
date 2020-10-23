@@ -15,17 +15,17 @@
       </div>
     </div>
     <footer @click="showList">
-      <div class="line_space">
+      <div class="line-space">
         <div class="line"></div>
       </div>
       <p>更多音律 （可叠加三个音律）</p>
     </footer>
     <footer @click="showList">
-      <div class="slide" v-if="!isSleep && isShow">
+      <div class="slide" :class="{ noshow: isShow }" v-if="!isSleep">
         <div
           v-for="(item, index) in tonalities"
           :key="index"
-          class="slide_item"
+          class="slide-item"
           @click.stop="playTonality(index)"
         >
           <img
@@ -43,21 +43,21 @@
           <div class="index" v-if="!item.ispointed && !item.isplay">
             {{ index + 1 }}
           </div>
-          <div class="list_right">
-            <div class="list_name" :class="{ red_name: item.ispointed }">
+          <div class="list-right">
+            <div class="list-name" :class="{ red: item.ispointed }">
               {{ item.name }}
             </div>
             <div class="time">{{ item.time }}</div>
           </div>
         </div>
       </div>
-      <div class="has_list" v-if="isSleep && isShow">
+      <div class="has-list" v-if="isSleep" :class="{ noshow: isShow }">
         <div v-for="(item, index) in SleepMusics" :key="index">
           <div class="musicBox" @click.stop="playing(index)">
             <img :src="item.imgUrl" alt="backgroundImg" />
             <img
               alt="playMusic"
-              id="listening"
+              class="listening"
               src="../assets/listening.png"
               v-if="item.isPlaying"
             />
@@ -154,26 +154,6 @@ export default class SpecialInfo extends Vue {
   private playing(index: number): void {
     this.SleepMusics[index].isPlaying = !this.SleepMusics[index].isPlaying;
   }
-
-  /*
-  private changedView(): void {
-    const slideBox = document.getElementById("slideBox");
-    this.$nextTick(() => {
-      const h = parseInt(window.getComputedStyle(slideBox).left) + 1;
-      const het = h + "px";
-      slideBox.style.left = het;
-    });
-  }
-  mounted(): void {
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const that = this;
-    const drag = function() {
-      that.changedView();
-    };
-    const footer = document.getElementsByTagName("footer")[0];
-    const foot = footer.addEventListener("touchmove", this.throttle(drag, 16));
-  }
-  */
 }
 </script>
 
@@ -225,6 +205,13 @@ header:after {
   width: 100%;
   box-sizing: border-box;
 }
+.noshow {
+  opacity: 0;
+  max-height: 0!important;
+  transition-duration: 500ms;
+  border: 0 !important;
+  padding: 0 !important;
+}
 .bottom > img {
   width: 32px;
   height: 33px;
@@ -245,7 +232,7 @@ header:after {
   float: right;
 }
 
-.line_space {
+.line-space {
   width: 100%;
   height: 4px;
   text-align: center;
@@ -270,17 +257,21 @@ footer {
 footer > p {
   padding-left: 15px;
 }
-.has_list {
+.has-list {
+  max-height: 200px;
+  padding: 0!important;
+  transition-duration: 0.8s;
   background-color: rgba(85, 85, 85, 0.1);
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
 }
 .slide {
-  width: 100%;
+  max-height: 200px;
+  transition-duration: 0.8s;
   margin-top: 10px;
   box-sizing: border-box;
 }
-.slide_item {
+.slide-item {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -289,30 +280,30 @@ footer > p {
   padding: 15px;
 }
 
-.slide_item > img {
+.slide-item > img {
   width: 20px;
   height: 20px;
 }
-.slide_item > .index {
+.slide-item > .index {
   width: 20px;
   height: 20px;
 }
-.list_right {
+.list-right {
   padding-left: 9px;
 }
-.list_right > div {
+.list-right > div {
   padding-bottom: 9px;
 }
-.list_right > .list_name {
+.list-right > .list-name {
   color: rgba(255, 255, 255, 1);
 }
-.list_right > .time {
+.list-right > .time {
   color: rgba(255, 255, 255, 0.6);
 }
-.list_right > .red_name {
+.list-right > .red {
   color: #ff5353;
 }
-footer > .has_list {
+footer > .has-list {
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
@@ -326,7 +317,7 @@ footer > .has_list {
   width: 60px;
   height: 60px;
 }
-#listening {
+.musicBox > .listening {
   position: absolute;
   width: 13px;
   height: 13px;
