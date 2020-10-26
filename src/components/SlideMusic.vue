@@ -13,7 +13,7 @@
         <div :class="{ special: isSpecial, 'each-img': !isSpecial }">
           <img :src="item.img" alt="musicImg" />
         </div>
-        <p class="text">{{ item.id }}</p>
+        <div class="text">{{ item.id }}</div>
       </div>
     </div>
   </div>
@@ -209,61 +209,6 @@ export default class SlideMusic extends Vue {
 }
 </script>
 
-<style scoped>
-.lateral-sliding {
-  width: 100%;
-  height: 140px;
-  display: flex;
-  padding-left: 15px;
-  justify-content: space-between;
-  overflow-x: auto;
-  overflow-y: hidden;
-  overflow: -moz-scrollbars-none;
-  padding-bottom: 15px;
-}
-.lateral-sliding::-webkit-scrollbar {
-  display: none;
-}
-.lateral-sliding-item {
-  width: 115px;
-  height: 144px;
-  display: flex;
-  margin-right: 15px;
-  flex-direction: column;
-}
-.lateral-sliding-item-special {
-  width: 245px;
-  height: 144px;
-  display: flex;
-  margin-right: 15px;
-  flex-direction: column;
-}
-.each-img {
-  width: 115px;
-  height: 126px;
-  background-color: #3b3e49;
-  border-radius: 5px;
-}
-.each-img > img {
-  width: 115px;
-  height: 126px;
-  border-radius: 5px;
-}
-.special {
-  width: 245px;
-  height: 126px;
-  background-color: #3b3e49;
-  border-radius: 10px;
-}
-.special > img {
-  width: 245px;
-  height: 126px;
-  border-radius: 10px;
-}
-.text {
-  color: #868992;
-  box-sizing: border-box;
-  padding-top: 10px;
-  padding-left: 10px;
-}
+<style scoped lang="scss">
+@import "../style/slideMusic";
 </style>

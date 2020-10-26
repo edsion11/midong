@@ -106,24 +106,6 @@ export default class HumiMusic extends Vue {
 }
 </script>
 
-<style scoped>
-.header {
-  font-size: 17px;
-  width: 100%;
-  height: 59px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.header > img {
-  width: 29px;
-  height: 29px;
-  margin-left: 10px;
-}
-.header > .none {
-  opacity: 0;
-}
-.title {
-  color: white;
-}
+<style scoped lang="scss">
+@import "../style/musicList";
 </style>

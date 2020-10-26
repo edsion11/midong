@@ -72,34 +72,6 @@ export default class HumiMusic extends Vue {
 }
 </script>
 
-<style scoped>
-.music_com {
-  overflow: hidden;
-}
-.header {
-  box-sizing: border-box;
-  padding: 15px;
-  width: 100%;
-  height: 52px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-.header > img {
-  width: 16px;
-  height: 24px;
-}
-.header-left > div {
-  position: relative;
-  left: 19px;
-  color: white;
-  display: inline;
-}
-.header-left > img {
-  position: relative;
-  top: 2px;
-  width: 16px;
-  height: 16px;
-}
+<style scoped lang="scss">
+@import "../style/humimusic";
 </style>

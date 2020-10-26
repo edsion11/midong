@@ -2,10 +2,10 @@ import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import Home from "../views/Home.vue";
 import Info from "../views/Info.vue"
-import Mylist from "../views/mylist.vue";
-import Nofavorite from "@/views/nofavorite.vue";
-import Loading from "@/views/loading.vue";
-import NetError from "@/views/netError.vue";
+import Mylist from "../views/MyList.vue";
+import Nofavorite from "@/views/NoFavorite.vue";
+import Loading from "@/views/Loading.vue";
+import NetError from "@/views/NetError.vue";
 import SpecialInfo from "@/components/SpecialInfo.vue";
 
 Vue.use(VueRouter);
@@ -30,11 +30,6 @@ const routes: Array<RouteConfig> = [
     path: "/nofavorite",
     name: "Nofavorite",
     component: Nofavorite
-  },
-  {
-    path: "/loading",
-    name: "Loading",
-    component: Loading
   },
   {
     path: "/netError",

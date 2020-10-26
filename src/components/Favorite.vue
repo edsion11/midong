@@ -8,7 +8,7 @@
       <List
         :type="item.title"
         :music-lists="item.musicList"
-        :is-music="item.ismusic"
+        :is-music="item.isMusic"
         :isSpecial="item.isSpecial"
         :isCombin="item.isCombin"
       ></List>
@@ -20,44 +20,28 @@
 import { Component, Vue } from "vue-property-decorator";
 import List from "@/components/List.vue";
 import { namespace } from "vuex-class";
-import { AppModule } from "@/store/modules/app";
-const MusicApp = namespace("MusicState");
+import { AppModule } from "@/store/modules/music";
+import {IMusics} from "@/interface";
+const COUNT = namespace("count")
 @Component({
   components: {
     List
   }
 })
 export default class extends Vue {
-  public musics: Array<object>;
-  public specials: Array<object>;
-  public combins: Array<object>;
-  public musicList: Array<object>
-  @MusicApp.Getter("count") public count: number | undefined;
+  public musics: Array<IMusics> | undefined;
+  public specials: Array<IMusics> | undefined;
+  public combins: Array<IMusics> | undefined;
+  public musicList: Array<IMusicss> | undefined;
   created(): void {
     this.musics = AppModule.musics;
     this.specials = AppModule.specials;
     this.combins = AppModule.combins;
-    this.musicList = AppModule.musicList
+    this.musicList = AppModule.musicList;
   }
 }
 </script>
 
-<style scoped>
-.header {
-  color: white;
-  font-size: 16px;
-  width: 100%;
-  padding: 15px;
-  padding-bottom: 3px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-}
-.header > div {
-  margin-left: 10px;
-}
-.header > img {
-  width: 16px;
-  height: 16px;
-}
+<style scoped lang="scss">
+@import "../style/favorite";
 </style>

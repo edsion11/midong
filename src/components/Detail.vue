@@ -28,18 +28,22 @@
           <img
             :src="WHITE_HEART"
             class="short-sentence-img"
-            v-if="!isLike"
+            v-if="!computeIsLike"
             @click="addLike"
           />
           <img
             :src="RED_HEART"
             class="short-sentence-img"
-            v-if="isLike"
+            v-if="computeIsLike"
             @click="addLike"
           />
         </div>
         <div class="line"></div>
-        <div v-for="(item, index) in musicList" :key="index" class="music-ul">
+        <div
+          v-for="(item, index) in musicList.data"
+          :key="index"
+          class="music-ul"
+        >
           <div class="index">
             <span>{{ index + 1 }}</span>
           </div>
@@ -58,8 +62,10 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
-import { AppModule } from "@/store/modules/app";
+import { AppModule } from "@/store/modules/music";
 import { IMGPATH } from "@/constants/imgPath";
+import { IMusicList } from "@/interface";
+import App from "@/App.vue";
 
 @Component({
   components: {}
@@ -72,36 +78,20 @@ export default class Detail extends Vue {
   PLAY: string = IMGPATH.PLAY;
   private title = "助眠";
   private titleName = "专辑|雨天的心情";
-  private isLike = false;
-  private musicList = [
-    {
-      name: "Yellow Post-Its",
-      time: "10:00"
-    },
-    {
-      name: "I did my best today",
-      time: "12:30"
-    },
-    {
-      name: "I am grateful",
-      time: "10:00"
-    },
-    {
-      name: "治愈英语",
-      time: "10:00"
-    },
-    {
-      name: "Yellow Post-Its",
-      time: "10:00"
-    },
-    {
-      name: "Yellow Post-Its",
-      time: "10:00"
-    }
-  ];
+  private musicList: IMusicList;
+  created(): void {
+    this.musicList = AppModule.musicLists;
+    this.isLike = AppModule.musicLists.isLike;
+  }
+  get computeIsLike() {
+    return AppModule.musicLists.isLike;
+  }
   private addLike(): void {
-    this.isLike = !this.isLike;
-    AppModule.addLike();
+    if (AppModule.musicLists.isLike) {
+      AppModule.popLike();
+    } else {
+      AppModule.addLike();
+    }
   }
   private back() {
     this.$router.back();
@@ -109,140 +99,6 @@ export default class Detail extends Vue {
 }
 </script>
 
-<style scoped>
-.all {
-  color: white;
-}
-.list-header {
-  margin-left: 10px;
-}
-.short-sentence {
-  line-height: 18px !important;
-}
-.short-sentence-img {
-  width: 20px;
-  height: 20px;
-}
-.line {
-  height: 1px;
-  background-color: gray;
-  width: 317px;
-  margin: 0 auto;
-}
-.header {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.header > img {
-  width: 29px;
-  height: 29px;
-  margin-left: 10px;
-}
-.header > .none {
-  opacity: 0;
-}
-.title {
-  color: white;
-}
-.article {
-  box-sizing: border-box;
-  padding: 15px;
-  width: 100%;
-}
-.article-content {
-  box-sizing: border-box;
-  padding: 15px;
-  background-color: rgba(255, 253, 253, 0.05);
-  border-radius: 10px;
-  height: 128px;
-}
-.article-content > div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.article-content > div > p {
-  font-size: 13px;
-  width: 285px;
-  height: 36px;
-  overflow: hidden;
-  display: -webkit-box;
-  /* -webkit-box-orient: vertical; */
-  /*! autoprefixer: off */
-  -webkit-box-orient: vertical;
-  /* autoprefixer: on */
-  -webkit-line-clamp: 2;
-  margin-top: 10px;
-  opacity: 0.6;
-}
-.article-content > p {
-  font-size: 13px;
-  width: 285px;
-  height: 36px;
-  overflow: hidden;
-  display: -webkit-box;
-  /* -webkit-box-orient: vertical; */
-  /*! autoprefixer: off */
-  -webkit-box-orient: vertical;
-  /* autoprefixer: on */
-  -webkit-line-clamp: 2;
-  margin-top: 10px;
-  opacity: 0.6;
-}
-.article-title1 {
-  font-size: 17px;
-}
-.index {
-  width: 44px;
-  height: 62px;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.index > span {
-  width: 6px;
-  height: 20px;
-}
-.music-all {
-  box-sizing: border-box;
-  background-color: rgba(255, 253, 253, 0.05);
-  border-radius: 10px;
-}
-.music-title-all {
-  margin-top: 17px;
-  height: 52px;
-  box-sizing: border-box;
-  padding: 15px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.play-all {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-.music-ul {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-right: 15px;
-}
-.music {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 80%;
-  font-size: 14px;
-}
-.time {
-  font-size: 12px;
-  margin-top: 5px;
-  opacity: 0.6;
-}
+<style scoped lang="scss">
+@import "../style/detail";
 </style>

@@ -53,7 +53,7 @@ export default class Header extends Vue {
     this.type[this.defaultTypeIndex].isClicked = true;
   }
   typeIndex = 0;
-  private changeMusic(index: number, item: Record<string, boolean>) {
+  private changeMusic(index: number) {
     this.typeIndex = index;
     this.change(index);
   }
@@ -63,45 +63,6 @@ export default class Header extends Vue {
 }
 </script>
 
-<style scoped>
-.nav {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.nav-img {
-  width: 29px;
-  height: 27px;
-  margin-left: 10px;
-}
-.text {
-  height: 50px;
-  display: flex;
-  align-items: center;
-  overflow-x: auto;
-  overflow-y: hidden;
-  overflow: -moz-scrollbars-none;
-  overflow: -moz-scrollbars-none;
-}
-.text::-webkit-scrollbar {
-  display: none;
-}
-span {
-  padding-left: 20px;
-  padding-right: 20px;
-  width: 34px;
-  white-space: nowrap;
-  height: 24px;
-  color: #ffffff;
-  font-size: 17px;
-  margin-left: 0;
-  margin-right: 0;
-  color: rgba(255, 255, 255, 0.4);
-}
-.clicked {
-  color: white;
-}
+<style scoped lang="scss">
+@import "../style/header.scss";
 </style>
